@@ -1,0 +1,43 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.1
+jobs:
+  job1:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: node test.js
+  job2:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          command: echo "The destroyer of the worlds"    
+  job3:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          command: echo "Hello Folks"       
+workflows:
+  version: 2
+  trail1: 
+    jobs:
+      - job1
+      - job2:
+          requires:
+            - job1
+  trail2: 
+    jobs:
+      - job2
+      - job3:
+          filters:
+            branches:
+              only:
+                - branch1
+ 
