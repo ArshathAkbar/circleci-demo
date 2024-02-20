@@ -34,7 +34,6 @@ workflows:
             - job1
   trail2: 
     jobs:
-      - job2
       - job3:
           filters:
             branches:
